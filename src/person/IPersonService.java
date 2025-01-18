@@ -10,8 +10,7 @@ public interface IPersonService {
 Kitap ödünç alma ve iade etme işlemlerini yönet.
      */
 
-    void addBook(Book book);
-    void removeBook(String isbn);
-    void updateBook(String isbn, Book updatedBook);
-    Book findBook(String isbn);
+    void addMember(Person member);
+    void removeMember(String id);
+    void updateMember(String id, Person updatedMember);
 }

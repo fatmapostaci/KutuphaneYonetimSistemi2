@@ -1,6 +1,13 @@
 package person;
 
 public class Librarian extends Person {
+
+
+
+    public Librarian(String name, int ID, String contactInfo) {
+        super(name, ID, contactInfo);
+    }
+
     @Override
     void performTask() {
 

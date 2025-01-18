@@ -3,23 +3,30 @@ package person;
 import java.awt.print.Book;
 
 public class PersonService implements IPersonService {
+    /*
+#### PersonService
+- IPersonService interface'ini implement eder
+- Üye verilerini ArrayList veya HashMap'te saklar
+- CRUD operasyonlarını yönetir
+- Kitap ödünç alma/iade işlemlerini yönetir
+- Üye işlemlerini kontrol eder
+
+ */
     @Override
-    public void addBook(Book book) {
+    public void addMember(Person member) {
 
     }
 
     @Override
-    public void removeBook(String isbn) {
+    public void removeMember(String id) {
 
     }
 
     @Override
-    public void updateBook(String isbn, Book updatedBook) {
+    public void updateMember(String id, Person updatedMember) {
 
     }
 
-    @Override
-    public Book findBook(String isbn) {
-        return null;
-    }
+
+
 }

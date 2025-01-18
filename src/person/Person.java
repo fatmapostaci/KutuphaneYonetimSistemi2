@@ -13,4 +13,9 @@ abstract class Person {
 
     abstract void performTask();
 
+    public Person(String name, int ID, String contactInfo) {
+        this.name = name;
+        this.ID = ID;
+        this.contactInfo = contactInfo;
+    }
 }
