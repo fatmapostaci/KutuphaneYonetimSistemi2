@@ -4,21 +4,17 @@ class Book {
 
     private String bookName;
     private String isbn;
-    private String writer;
+    private String author;
     private boolean statusInfo;
 
-    public Book(String bookName, String isbn, String writer, boolean statusInfo) {
+    public Book(String bookName, String isbn, String author, boolean statusInfo) {
         this.bookName = bookName;
         this.isbn = isbn;
-        this.writer = writer;
+        this.author = author;
         this.statusInfo = statusInfo;
     }
 
     public String getBookName() {
-
-        System.out.println("deneme");
-        int fatma;
-        fatma=4;
         return bookName;
     }
 
@@ -34,12 +30,12 @@ class Book {
         this.statusInfo = statusInfo;
     }
 
-    public String getWriter() {
-        return writer;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setWriter(String writer) {
-        this.writer = writer;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getIsbn() {
@@ -55,9 +51,9 @@ class Book {
         return "Book{" +
                 "bookName='" + bookName + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", writer='" + writer + '\'' +
+                ", writer='" + author + '\'' +
                 ", statusInfo=" + statusInfo +
                 '}';
     }
 }
-//Mertay
+
