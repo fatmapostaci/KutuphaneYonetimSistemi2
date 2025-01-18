@@ -1,0 +1,74 @@
+
+
+Kişi 1: Temel Yapı ve Modelleme (Backend Yapı)
+Görevler:
+
+Book Sınıfı:
+Encapsulation ilkelerine uygun olarak Book sınıfını oluştur (örneğin, kitap adı, ISBN, yazar, durum bilgisi vb.).
+
+Person Abstract Sınıfı:
+Temel özellikleri (name, ID, contactInfo vb.) tanımla.
+Member ve Librarian Sınıfları:
+Person sınıfını genişleterek Member ve Librarian sınıflarını oluştur.
+Üyeye özel işlemleri (ödünç alınabilir kitap sayısı vb.) ve kütüphaneciye özel işlemleri ekle.
+
+Interface Tanımları:
+IBookService ve IPersonService interface'lerini tanımla.
+
+Araçlar:
+Java sınıfları ve interface'leri için tasarım prensiplerine dikkat et.
+Tüm sınıflarda getter ve setter metodlarını uygula.
+
+Kişi 2: Servis Katmanı ve İş Mantığı
+Görevler:
+
+BookService:
+IBookService interface'ini implement et.
+Kitap ekleme, silme, güncelleme ve arama işlemlerini uygula.
+ArrayList veya HashMap kullanarak kitap verilerini sakla.
+
+PersonService:
+IPersonService interface'ini implement et.
+Üye ekleme, silme, güncelleme işlemlerini uygula.
+Kitap ödünç alma ve iade etme işlemlerini yönet.
+
+Exception Handling:
+Özel exception sınıflarını (LibraryException, BookNotFoundException, vb.) oluştur.
+Hata durumları için kontrol mekanizmalarını uygula.
+
+Araçlar:
+Koleksiyon yapıları (ArrayList, HashMap) kullanarak veri saklama.
+Exception handling ile hata kontrolü.
+
+Kişi 3: Kullanıcı Arayüzü ve Sistem Koordinasyonu
+Görevler:
+LibraryManagementSystem Ana Sınıfı:
+Konsol tabanlı kullanıcı arayüzünü oluştur.
+Menü sistemi ile kullanıcı işlemlerini yönlendir (örn. 1: Kitap Ekle, 2: Üye Ekle vb.).
+Kullanıcı girdilerini kontrol et ve doğrula.
+Sistem Koordinasyonu:
+BookService ve PersonService sınıflarını ana uygulamaya entegre et.
+Tüm işlemler arasında veri akışını sağla.
+Bonus Özellikler (Opsiyonel):
+Gecikme cezası hesaplama.
+Raporlama özellikleri (toplam ödünç alınan kitap sayısı vb.).
+Kitap rezervasyon sistemi.
+Araçlar:
+Konsol girdisi ve çıktısı için Scanner kullanımı.
+Kullanıcı dostu bir menü yapısı oluştur.
+Örnek İş Akışı
+
+Kişi 1:(Fatma Hanım)
+Temel sınıflar ve interface'leri oluşturduktan sonra BookService ve PersonService için temel şablonları hazırlar.
+Kişi 2:(Mertay)
+Servis katmanını geliştirir, CRUD işlemlerini uygular ve gerekli exception'ları entegre eder.
+Kişi 3:(mehmet)
+Konsol menüsü üzerinden servislere erişim sağlayacak ana sınıfı geliştirir.
+Son Adımlar
+Test ve Birleştirme:
+Tüm ekip üyeleri kodlarını bir araya getirir.
+Sistem genel testlerden geçirilir (örneğin, tüm menü seçeneklerinin düzgün çalıştığından emin olun).
+Kod İncelemesi:
+Herkes, yazdığı kodu ekip arkadaşlarına açıklar ve geri bildirim alır.
+Son Teslim:
+Tüm kodlar ve dokümantasyon birleştirilerek teslim edilir.

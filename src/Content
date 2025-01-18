@@ -1,0 +1,69 @@
+# Kütüphane Yönetim Sistemi Projesi
+Bu proje, Java OOP kavramlarını öğrenmek için tasarlanmış bir eğitim projesidir.
+## Öğrenilecek Kavramlar
+1. Encapsulation (Kapsülleme)
+2. Inheritance (Kalıtım)
+3. Abstraction (Soyutlama)
+4. Interface (Arayüz)
+5. Polymorphism (Çok Biçimlilik)
+
+## Proje Adımları
+### Adım 1: Temel Sınıfları Oluşturma
+- Book sınıfını oluşturun (Encapsulation)
+- Person abstract sınıfını oluşturun (Abstraction)
+- Member ve Librarian sınıflarını Person'dan türetin (Inheritance)
+### Adım 2: Interface Kullanımı
+- IBookService interface'ini oluşturun
+- IPersonService interface'ini oluşturun
+### Adım 3: Servis Katmanı
+- BookService sınıfını IBookService'den implement edin
+- PersonService sınıfını IPersonService'den implement edin
+### Adım 4: Sistem Fonksiyonları
+- Kitap ekleme/silme/güncelleme
+- Üye ekleme/silme/güncelleme
+- Kitap ödünç alma/iade etme
+- Kitap arama
+### Adım 5: Servis İmplementasyonları
+- BookService sınıfını oluşturun ve IBookService'i implement edin
+- PersonService sınıfını oluşturun ve IPersonService'i implement edin
+- ArrayList veya HashMap kullanarak veri depolama yapısını oluşturun
+### Adım 6: Exception Handling
+- LibraryException sınıfını oluşturun
+- Hata durumları için özel exception'lar tanımlayın:
+  - BookNotFoundException
+  - MemberNotFoundException
+  - BookNotAvailableException
+  - MaxBooksExceededException
+### Adım 7: Konsol Uygulaması
+- LibraryManagementSystem ana sınıfını oluşturun
+- Kullanıcı menüsü tasarlayın
+- Tüm işlemleri menüden yapılabilir hale getirin
+### Servis Implementasyonları
+#### BookService
+- IBookService interface'ini implement eder
+- Kitap verilerini ArrayList veya HashMap'te saklar
+- CRUD operasyonlarını yönetir
+- Kitap arama ve filtreleme işlemlerini gerçekleştirir
+#### PersonService
+- IPersonService interface'ini implement eder
+- Üye verilerini ArrayList veya HashMap'te saklar
+- CRUD operasyonlarını yönetir
+- Kitap ödünç alma/iade işlemlerini yönetir
+- Üye işlemlerini kontrol eder
+### Ana Uygulama
+#### LibraryManagementSystem
+- Konsol tabanlı kullanıcı arayüzü
+- Menü sistemi
+- Tüm işlemlerin koordinasyonu
+- Exception handling
+- Kullanıcı girdisi doğrulama
+## Bonus Görevler
+1. Kitap rezervasyon sistemi ekleyin
+2. Gecikme cezası hesaplama sistemi ekleyin
+3. Raporlama özellikleri ekleyin
+4. Dosya işlemleri ile verileri kalıcı hale getirin
+## Değerlendirme Kriterleri
+1. Doğru encapsulation kullanımı
+2. Interface ve abstract sınıfların uygun kullanımı
+3. Inheritance ilişkilerinin doğru kurulması
+4. Kod organizasyonu ve temizliği
