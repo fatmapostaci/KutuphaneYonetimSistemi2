@@ -7,11 +7,12 @@ Menü sistemi ile kullanıcı işlemlerini yönlendir (örn. 1: Kitap Ekle, 2: �
 Kullanıcı girdilerini kontrol et ve doğrula.
 
 
-### Ana Uygulama
 #### LibraryManagementSystem
 - Konsol tabanlı kullanıcı arayüzü
 - Menü sistemi
 - Tüm işlemlerin koordinasyonu
+- Exception handling
+- Kullanıcı girdisi doğrulama
      */
 
 }

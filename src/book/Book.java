@@ -1,20 +1,19 @@
 package book;
 
-import java.util.HashMap;
-import java.util.Map;
-
-class Book {
+public class Book {
 
     private String bookName;
     private String isbn;
     private String author;
-    private boolean statusInfo;
+    private boolean available;
+    private String currentBorrower;
 
-    public Book(String bookName, String isbn, String author, boolean statusInfo) {
+    public Book(String bookName, String isbn, String author, boolean available,String currentBorrower) {
         this.bookName = bookName;
         this.isbn = isbn;
         this.author = author;
-        this.statusInfo = statusInfo;
+        this.available = available;
+        this.currentBorrower = currentBorrower;
     }
 
     public String getBookName() {
@@ -26,11 +25,11 @@ class Book {
     }
 
     public boolean isStatusInfo() {
-        return statusInfo;
+        return available;
     }
 
     public void setStatusInfo(boolean statusInfo) {
-        this.statusInfo = statusInfo;
+        this.available = statusInfo;
     }
 
     public String getAuthor() {
@@ -55,7 +54,7 @@ class Book {
                 "bookName='" + bookName + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", writer='" + author + '\'' +
-                ", statusInfo=" + statusInfo +
+                ", available=" + available +
                 '}';
     }
 }

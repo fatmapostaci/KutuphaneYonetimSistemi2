@@ -1,6 +1,7 @@
 package book;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BookService implements IBookService {
@@ -32,12 +33,27 @@ public class BookService implements IBookService {
     }
 
     @Override
-    public void updateBook(String isbn, Book updatedBook) {
+    public Book findBook(String isbn) {
+        return null;
+    }
+
+    @Override
+    public void updateBook(String isbn, Book book) {
 
     }
 
     @Override
-    public Book findBook(String isbn) {
-        return null;
+    public List<Book> getAllBooks() {
+        return List.of();
+    }
+
+    @Override
+    public boolean isBookAvailable(String isbn) {
+        return false;
+    }
+
+    @Override
+    public List<Book> searchBooks(String keyword) {
+        return List.of();
     }
 }
