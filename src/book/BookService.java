@@ -81,23 +81,23 @@ public class BookService implements IBookService {
         }
 
         if (updatedBook == null) {
+
             throw new Child_Book_Not_Available_Ex("Updated book cannot be null.");
+
+        }
+        if (books.containsKey(isbn)) {
+            books.put(isbn, updatedBook);
+            System.out.println("Book with ISBN " + isbn + " has been updated successfully.");
+        } else {
+            throw new Child_Book_Not_Available_Ex("No book found with ISBN " + isbn + ". Update failed.");
         }
 
     }
-/*
-    @Override
-    public void updateBook(String isbn, Book book) {
 
-        switch (books.containsKey(isbn)) {
-            case true -> {
-                books.put(isbn, updatedBook);
-                System.out.println("Book with ISBN " + isbn + " has been updated successfully.");
-            }
-            case false -> throw new Child_Book_Not_Available_Ex("No book found with ISBN " + isbn + ". Update failed.");
-        }
-    }
-*/
+
+
+
+
     /**
      * (first if)  the ISBN is invalid (null or empty), an IllegalArgumentException is thrown.
      * (Second if) not assigned .get isbn to foundbook it turns null and throw the exception
