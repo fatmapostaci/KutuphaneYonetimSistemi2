@@ -12,7 +12,7 @@ Kullanıcı girdilerini kontrol et ve doğrula.
 - Menü sistemi
 - Tüm işlemlerin koordinasyonu
 - Exception handling
-- Kullanıcı girdisi doğrulama
+- Kullanıcı(Librarian) girdisi doğrulama
      */
 
 }

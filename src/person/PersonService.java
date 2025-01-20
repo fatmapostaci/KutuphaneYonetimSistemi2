@@ -29,7 +29,7 @@ public class PersonService implements IPersonService {
         System.out.print("-Member Name: ");
         String id = TryCatch.stringInput();
 
-        member.setName( );
+      //  member.setName( );
 
         if( getAllMembers().contains(member.getId()) ) {
             System.out.print("-Member Surname: ");
@@ -63,7 +63,7 @@ public class PersonService implements IPersonService {
         Set<Map.Entry< String, Person >> entryPersonSet = Person.getPersonList().entrySet();
 
         for (Map.Entry<String, Person> stringPersonEntry : entryPersonSet) {
-            if( stringPersonEntry.getValue().get )
+           // if( stringPersonEntry.getValue().get )
             memberList.add( (Member) stringPersonEntry.getValue());
         }
         return memberList;
