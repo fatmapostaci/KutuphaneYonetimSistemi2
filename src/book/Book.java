@@ -50,12 +50,15 @@ public class Book {
 
     @Override
     public String toString() {
+        System.out.println("sil");
         return "Book{" +
                 "bookName='" + bookName + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", writer='" + author + '\'' +
                 ", available=" + available +
                 '}';
+
+
     }
 }
 
