@@ -5,22 +5,35 @@ abstract public class Person {
 
     private String name;
     private String surname;
-    private String id;
+    private final String id;   //final id
     private String contactInfo;
     private String email;
-    private PersonType memberOrLibrarian;
+    private static int idCounter = 1000;
 
-    private static HashMap<String, Person> personList = new HashMap<>();
 
 
     abstract void performTask();
 
-    public Person(String name,String surname, String id, String contactInfo, String email) {
+    public Person(String name,String surname, String contactInfo, String email) {
         this.name = name;
         this.surname = surname;
-        this.id = id;
         this.contactInfo = contactInfo;
         this.email = email;
+        this.id = generateId();   //id is final
+    }
+
+
+    /**
+     * Generates a unique ID for the member using a static counter and the first letters of the name and surname.
+     * The ID format is: "{FirstNameInitial}{SurnameInitial}{idCounter}".
+     * @return A unique member ID.
+     */
+    private String generateId() {
+
+        // Benzersiz bir ID oluşturmak için statik idCounter arttırılır.
+        idCounter++;
+        //her person için ad soyad ilk harflerini alır, static idCounter'ı ekler ve her kişiye specific id üretir.
+        return "" + String.valueOf(name.charAt(0)).toUpperCase() + String.valueOf(surname.charAt(0)).toUpperCase() + idCounter  ;
     }
 
     @Override
@@ -54,10 +67,6 @@ abstract public class Person {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getContactInfo() {
         return contactInfo;
     }
@@ -74,11 +83,4 @@ abstract public class Person {
         this.email = email;
     }
 
-    public static HashMap<String, Person> getPersonList() {
-        return personList;
-    }
-
-    public static void setPersonList(HashMap<String, Person> personList) {
-        Person.personList = personList;
-    }
 }
