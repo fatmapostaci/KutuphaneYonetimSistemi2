@@ -16,6 +16,22 @@ public class Book {
         this.currentBorrower = currentBorrower;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public String getCurrentBorrower() {
+        return currentBorrower;
+    }
+
+    public void setCurrentBorrower(String currentBorrower) {
+        this.currentBorrower = currentBorrower;
+    }
+
     public String getBookName() {
         return bookName;
     }
@@ -50,12 +66,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "bookName='" + bookName + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", writer='" + author + '\'' +
-                ", available=" + available +
-                '}';
+        return "Book Name: " + bookName + "\nISBN: " + isbn + "\nWriter: " + author + "\nAvailable: " + (available ? "Yes" : "No") + "\n";
     }
 }
 
