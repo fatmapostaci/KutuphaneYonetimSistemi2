@@ -26,14 +26,14 @@ public class PersonService implements IPersonService {
         System.out.print("-Member Name: ");
         member.setName( TryCatch.stringInput());
 
-        if( getAllMembers().contains(member.getName()) )
-
-        System.out.print("-Member Surname: ");
-        member.setSurname( TryCatch.stringInput());
-        System.out.print("-Contact Info: ");
-        member.setContactInfo( TryCatch.stringInput());
-        System.out.print("-Member email: ");
-        member.setEmail( TryCatch.stringInput());
+        if( getAllMembers().contains(member.getName()) ) {
+            System.out.print("-Member Surname: ");
+            member.setSurname(TryCatch.stringInput());
+            System.out.print("-Contact Info: ");
+            member.setContactInfo(TryCatch.stringInput());
+            System.out.print("-Member email: ");
+            member.setEmail(TryCatch.stringInput());
+        }
     }
 
     @Override
