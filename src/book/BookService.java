@@ -4,6 +4,7 @@ import mertay.exceptionsclasses.Child_Book_Not_Available_Ex;
 import mertay.exceptionsclasses.Child_Book_Not_Found_Ex;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BookService implements IBookService {
@@ -73,6 +74,7 @@ public class BookService implements IBookService {
      * @param updatedBook
      */
     @Override
+
     public void updateBook(String isbn, Book updatedBook) {
         if (isbn == null || isbn.isEmpty()) {
             throw new Child_Book_Not_Found_Ex("ISBN cannot be null or empty.");
@@ -82,6 +84,11 @@ public class BookService implements IBookService {
             throw new Child_Book_Not_Available_Ex("Updated book cannot be null.");
         }
 
+    }
+/*
+    @Override
+    public void updateBook(String isbn, Book book) {
+
         switch (books.containsKey(isbn)) {
             case true -> {
                 books.put(isbn, updatedBook);
@@ -90,7 +97,7 @@ public class BookService implements IBookService {
             case false -> throw new Child_Book_Not_Available_Ex("No book found with ISBN " + isbn + ". Update failed.");
         }
     }
-
+*/
     /**
      * (first if)  the ISBN is invalid (null or empty), an IllegalArgumentException is thrown.
      * (Second if) not assigned .get isbn to foundbook it turns null and throw the exception
@@ -98,6 +105,7 @@ public class BookService implements IBookService {
      * @return
      */
     @Override
+
     public Book findBook(String isbn) {
         if (isbn == null || isbn.isEmpty()) {
             throw new Child_Book_Not_Available_Ex("ISBN cannot be null or empty.");
@@ -112,5 +120,19 @@ public class BookService implements IBookService {
         }
 
         return foundBook;
+
+    public List<Book> getAllBooks() {
+        return List.of();
+    }
+
+    @Override
+    public boolean isBookAvailable(String isbn) {
+        return false;
+    }
+
+    @Override
+    public List<Book> searchBooks(String keyword) {
+        return List.of();
+
     }
 }
