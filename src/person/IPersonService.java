@@ -1,6 +1,8 @@
 package person;
 
-import java.awt.print.Book;
+import book.Book;
+
+import java.util.List;
 
 public interface IPersonService {
 
@@ -10,7 +12,12 @@ public interface IPersonService {
 Kitap ödünç alma ve iade etme işlemlerini yönet.
      */
 
-    void addMember(Person member);
-    void removeMember(String id);
-    void updateMember(String id, Person updatedMember);
+        void addMember(Member member);              // Yeni üye ekleme
+        void removeMember(String id);               // ID ile üye silme
+        Member findMember(String id);               // ID ile üye arama
+        void updateMember(String id, Member member);// Üye bilgilerini güncelleme
+        List<Member> getAllMembers();               // Tüm üyeleri listeleme
+        void borrowBook(String memberId, String isbn);// Kitap ödünç alma
+        void returnBook(String memberId, String isbn);// Kitap iade etme
+        List<Book> getBorrowedBooks(String memberId);// Üyenin ödünç aldığı kitapları listeleme
 }
