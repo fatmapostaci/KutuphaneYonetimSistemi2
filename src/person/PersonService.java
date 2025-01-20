@@ -2,7 +2,10 @@ package person;
 import book.Book;
 import utilities.TryCatch;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class PersonService implements IPersonService {
 
@@ -24,9 +27,11 @@ public class PersonService implements IPersonService {
 
 
         System.out.print("-Member Name: ");
-        member.setName( TryCatch.stringInput());
+        String id = TryCatch.stringInput();
 
-        if( getAllMembers().contains(member.getName()) ) {
+        member.setName( );
+
+        if( getAllMembers().contains(member.getId()) ) {
             System.out.print("-Member Surname: ");
             member.setSurname(TryCatch.stringInput());
             System.out.print("-Contact Info: ");
@@ -53,7 +58,15 @@ public class PersonService implements IPersonService {
 
     @Override
     public List<Member> getAllMembers() {
-        return List.of();
+
+        List<Member> memberList = new ArrayList<>();
+        Set<Map.Entry< String, Person >> entryPersonSet = Person.getPersonList().entrySet();
+
+        for (Map.Entry<String, Person> stringPersonEntry : entryPersonSet) {
+            if( stringPersonEntry.getValue().get )
+            memberList.add( (Member) stringPersonEntry.getValue());
+        }
+        return memberList;
     }
 
     @Override

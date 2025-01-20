@@ -8,6 +8,7 @@ abstract public class Person {
     private String id;
     private String contactInfo;
     private String email;
+    private PersonType memberOrLibrarian;
 
     private static HashMap<String, Person> personList = new HashMap<>();
 
