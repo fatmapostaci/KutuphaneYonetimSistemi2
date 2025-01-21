@@ -27,6 +27,7 @@ import book.BookService;
 import person.Member;
 import person.PersonService;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class LibraryManagementSystem {
@@ -58,6 +59,7 @@ public class LibraryManagementSystem {
                 }
                 default -> System.out.println("Gecersiz secim. Lütfen tekrar deneyin.");
             }
+            System.out.println();
         }
         System.out.println("Program sonlandi.");  // Program sonlandiginda mesaj yazdırılır
     }
@@ -105,8 +107,8 @@ public class LibraryManagementSystem {
     // 3- Tüm işlemlerin koordinasyonu ==> Kitapları listele
     private static void listBooks() {
         System.out.println("Kayitli Kitaplar:");
-        for (Book book : bookService.getAllBooks()) { // Kitaplarin listesini getirir
-            System.out.println(book);
+        for (Map.Entry<String, Book> book : bookService.getAllBooks().entrySet()) { // Kitaplarin listesini getirir
+            System.out.println(book.getValue());
         }
     }
 
