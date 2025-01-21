@@ -20,4 +20,5 @@ Kitap ödünç alma ve iade etme işlemlerini yönet.
         void borrowBook(String memberId, String isbn);// Kitap ödünç alma
         void returnBook(String memberId, String isbn);// Kitap iade etme
         List<Book> getBorrowedBooks(String memberId);// Üyenin ödünç aldığı kitapları listeleme
+
 }
