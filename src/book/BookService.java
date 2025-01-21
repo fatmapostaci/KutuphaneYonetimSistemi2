@@ -21,7 +21,7 @@ public class BookService implements IBookService {
 - Kitap arama ve filtreleme işlemlerini gerçekleştirir
      */
 
-    private static Map<String, Book> books = new HashMap<>();
+    public static Map<String, Book> books = new HashMap<>();
 
     public static void main(String[] args) {
         BookService bookService = new BookService();

@@ -110,7 +110,7 @@ public class LibraryManagementSystem {
 
     // 3- Tüm işlemlerin koordinasyonu ==> Yeni üye ekle
     private static void addMember() {
-
+        personService.borrowBook("FP1001","ISBN10000");
         System.out.print("-New Member Name: ");
         String newMemberName = TryCatch.stringInput();
         System.out.print("-New Member Surname: ");

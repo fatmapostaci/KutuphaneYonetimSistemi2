@@ -1,7 +1,7 @@
 package person;
 
 import book.Book;
-import utilities.TryCatch;
+import book.BookService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class PersonService implements IPersonService {
+
 
     /*
     #### PersonService
@@ -154,19 +155,90 @@ public class PersonService implements IPersonService {
         return memberList;
     }
 
+    /**
+     * This method allows a member to borrow a book if they have not exceeded their total borrow limit.
+     * If the member is eligible to borrow the book, the current borrower of the book is updated,
+     * and the member's borrow count is incremented.
+     *
+     * @param memberId The ID of the member borrowing the book.
+     * @param isbn     The ISBN of the book to be borrowed.
+     * @throws IllegalArgumentException If the specified member or book cannot be found.
+     */
     @Override
     public void borrowBook(String memberId, String isbn) {
 
-    }
+        //memberId ye ait olan üye bilgileri findMember() methodu ile getirilir
+        Member borrower = findMember(memberId);
 
+        //member ın ödünç aldığı kitap sayısı total ödünç sayısından küçük ise ödünç alma işlemini yapar.
+        if (borrower.getBorrowNumber() < borrower.getTotalBorrowNumber()) {
+
+            //isbn id sine ait olan kitap bilgileri books(HashMap) listesinden getirilir.
+            Book borrowedBook = BookService.books.get(isbn);
+
+            //ödünç alan kişinin ödünç aldığı kitap, borrowedBooks(List) listesine kitabı ekler
+            borrower.getBorrowedBooks().add(borrowedBook);
+            System.out.println("Test amaçlı sout - borrower.getBorrowedBooks() "+  borrower.getBorrowedBooks());
+
+            //ödünç alınan kitabın (boolean)setAvailable değeri false olarak güncellenir.
+            borrowedBook.setAvailable(false);
+
+            //ödünç alınan kitabı alan üyenin adı soyadı, currentBorrower değişkenine kaydedilir.
+            borrowedBook.setCurrentBorrower(borrower.getName() + " " + borrower.getSurname());
+
+            // üyenin kitap ödünç alma sayısı 1 arttırılır.
+            borrower.setBorrowNumber(+1);
+        }
+        //total ödünç sayısından fazla kitap almak istenirse, ödünç alma isteğine izin verilmez.
+        else {
+            System.out.println("Ödünç almaya izin verilemiyor. " + borrower.totalBorrowNumber + " kitaptan fazla ödünç alınamaz.");
+        }
+    }
+    /**
+     * This method allows a member to return a borrowed book. When the book is returned, it is removed
+     * from the member's borrowed books list, the current borrower information of the book is cleared,
+     * the book's availability is set to true, and the member's borrow count is decremented.
+     *
+     * @param memberId The ID of the member returning the book.
+     * @param isbn The ISBN of the book being returned.
+     * @throws IllegalArgumentException If the specified member or book cannot be found.
+     */
     @Override
     public void returnBook(String memberId, String isbn) {
 
-    }
+        //memberId ye ait olan üye bilgileri findMember() methodu ile getirilir
+        Member borrower = findMember(memberId);
 
+        //isbn id sine ait olan kitap bilgileri books(HashMap) listesinden getirilir.
+        Book borrowedBook = BookService.books.get(isbn);
+
+        //ödünç alan kişinin ödünç aldığı kitap, borrowedBooks(List) listesinden silinir
+        borrower.getBorrowedBooks().remove(borrowedBook);
+
+        //ödünç alınan kitabın alan üyenin adı soyadı, currentBorrower değişkeninden silinir.
+        borrowedBook.setCurrentBorrower("");
+
+        //ödünç alınan kitabın (boolean)setAvailable değeri true olarak güncellenir.
+        borrowedBook.setAvailable(true);
+
+        // üyenin kitap ödünç alma sayısı 1 azaltılır.
+        borrower.setBorrowNumber(-1);
+    }
+    /**
+     * This method retrieves the list of books currently borrowed by the specified member.
+     * It returns the list of books the member has borrowed.
+     *
+     * @param memberId The ID of the member whose borrowed books are to be retrieved.
+     * @return A list of books that the specified member has borrowed.
+     * @throws IllegalArgumentException If the specified member cannot be found.
+     */
     @Override
     public List<Book> getBorrowedBooks(String memberId) {
-        return List.of();
+
+        //memberId ye ait olan üye bilgileri findMember() methodu ile getirilir
+        Member borrower = findMember(memberId);
+        //üyenin List türündeki ödünç aldığı kitap listesini return eder.
+        return borrower.getBorrowedBooks();
     }
 
 
