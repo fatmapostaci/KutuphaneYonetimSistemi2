@@ -8,7 +8,7 @@ abstract public class Person {
     private final String id;   //final id
     private String contactInfo;
     private String email;
-    private static int idCounter = 1000;
+    private static int idCounter = 1000;   //static ürettiğimiz idcounter değeri,her obje üretilirken id değişkenine eklenecek
 
 
 
@@ -19,7 +19,7 @@ abstract public class Person {
         this.surname = surname;
         this.contactInfo = contactInfo;
         this.email = email;
-        this.id = generateId();   //id is final
+        this.id = generateId();   //id is final for each Person object
     }
 
 
