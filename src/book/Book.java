@@ -16,6 +16,9 @@ public class Book {
         this.currentBorrower = currentBorrower;
     }
 
+    public Book(String name, String author) {
+    }
+
     public String getBookName() {
         return bookName;
     }
@@ -50,7 +53,6 @@ public class Book {
 
     @Override
     public String toString() {
-        System.out.println("sil");
         return "Book{" +
                 "bookName='" + bookName + '\'' +
                 ", isbn='" + isbn + '\'' +
