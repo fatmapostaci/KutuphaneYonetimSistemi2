@@ -57,7 +57,7 @@ public class TryCatch {
         do {
             giris = "";
             try {
-                giris = scan.next(); // Read the next token
+                giris = scan.nextLine(); // Read the next token
                 scan.nextLine(); // Consume the remaining newline
                 flag = false;
             } catch (Exception e) {
