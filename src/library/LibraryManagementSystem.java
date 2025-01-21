@@ -111,17 +111,19 @@ public class LibraryManagementSystem {
     // 3- Tüm işlemlerin koordinasyonu ==> Yeni üye ekle
     private static void addMember() {
 
-        personService.addMember();
+        System.out.print("-New Member Name: ");
+        String newMemberName = TryCatch.stringInput();
+        System.out.print("-New Member Surname: ");
+        String newMemberSurname = TryCatch.stringInput();
+        System.out.print("-Contact Info: ");
+        String newMemberContactInfo = TryCatch.stringInput();
+        System.out.print("-Member email: ");
+        String newMemberEmail = TryCatch.stringInput();
+
+        Member newMember= new Member(newMemberName,newMemberSurname,newMemberContactInfo,newMemberEmail);
+        personService.addMember(newMember);
     }
 
-   /* // 3- Tüm işlemlerin koordinasyonu ==> Üyeleri listele
-    private static void listMembers() {
-        System.out.println("Kayitli Üyeler:");
-        for (Member:
-            personService.getMembers()) {
-            System.out.println(member);
-        }
-    }*/
 }
 
 
