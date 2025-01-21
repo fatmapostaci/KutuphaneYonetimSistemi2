@@ -3,7 +3,6 @@ package person;
 import book.Book;
 import book.BookService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -139,20 +138,18 @@ public class PersonService implements IPersonService {
      * @return A {@link List} containing all members.
      */
     @Override
-    public List<Member> getAllMembers() {
-
-        // üyeleri saklamak için list referansı ile bir arraylist objesi oluşturur
-        List<Member> memberList = new ArrayList<>();
+    public Map<String, Member> getAllMembers() {
 
         //Member clasındaki memberListi entrySet olarak alıp, Set referansı ile MemberSet üretiriz
         Set<Map.Entry<String, Member>> entryMemberSet = Member.getMemberList().entrySet();
 
         //for each döngüsü ile MemberSet in entrylerini gezerek memberList'e ekliyoruz
         for (Map.Entry<String, Member> stringEntry : entryMemberSet) {
-            memberList.add(stringEntry.getValue());
+
+            System.out.println(stringEntry.getValue());
+            System.out.println("------------------------------");
         }
-        //getAllMembers methodu List referansı ile memberList return eder
-        return memberList;
+        return Member.getMemberList();
     }
 
     /**
@@ -226,20 +223,35 @@ public class PersonService implements IPersonService {
     }
     /**
      * This method retrieves the list of books currently borrowed by the specified member.
-     * It returns the list of books the member has borrowed.
+     * If the member has no borrowed books, a message is printed and `null` is returned.
+     * If the member has borrowed books, their details are printed, and the list of borrowed books is returned.
      *
      * @param memberId The ID of the member whose borrowed books are to be retrieved.
-     * @return A list of books that the specified member has borrowed.
-     * @throws IllegalArgumentException If the specified member cannot be found.
+     * @return A list of books that the specified member has borrowed, or null if no books are borrowed.
      */
     @Override
     public List<Book> getBorrowedBooks(String memberId) {
 
         //memberId ye ait olan üye bilgileri findMember() methodu ile getirilir
         Member borrower = findMember(memberId);
-        //üyenin List türündeki ödünç aldığı kitap listesini return eder.
-        return borrower.getBorrowedBooks();
-    }
+        List<Book> borrowedBookList = borrower.getBorrowedBooks();
 
+        //ödünç alınan kitap listesi boş ise null return eder.
+        if(borrowedBookList == null) {
+            System.out.println("Üyenin ödünç aldığı kitap bulunmuyor.");
+            return null;
+        }
+        //ödünç alınan kitap listesinde kitap eklenmiş ise, liste yazdırılır ve return eder.
+        else {
+            //foreach döngüsü ise ödünç alınan kitap listesi yazdırılır
+            for( Book borrowedBook : borrowedBookList ){
+
+                System.out.println(borrowedBook);
+                System.out.println("-------------------------------");
+            }
+            //üyenin List türündeki ödünç aldığı kitap listesini return eder.
+            return borrowedBookList;
+        }
+    }
 
 }
