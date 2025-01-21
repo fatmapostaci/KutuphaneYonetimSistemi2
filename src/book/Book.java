@@ -18,7 +18,7 @@ public class Book {
 
 
     public Book(String name, String author) {
-
+    }
     public boolean isAvailable() {
         return available;
     }
@@ -70,16 +70,6 @@ public class Book {
 
     @Override
     public String toString() {
-
-        return "Book{" +
-                "bookName='" + bookName + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", writer='" + author + '\'' +
-                ", available=" + available +
-                '}';
-
-
-
         return "Book Name: " + bookName + "\nISBN: " + isbn + "\nWriter: " + author + "\nAvailable: " + (available ? "Yes" : "No") + "\n";
 
     }
