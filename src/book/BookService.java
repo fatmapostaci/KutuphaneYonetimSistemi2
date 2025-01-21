@@ -2,6 +2,7 @@ package book;
 
 import mertay.exceptionsclasses.Child_Book_Not_Available_Ex;
 import mertay.exceptionsclasses.Child_Book_Not_Found_Ex;
+import person.Member;
 
 import java.util.*;
 
@@ -25,13 +26,13 @@ public class BookService implements IBookService {
     public static void main(String[] args) {
         BookService bookService = new BookService();
 
-        Book book1 = new Book("Rich dad poor dad","10","Robert Kiyosaki",true,"available");
-        Book book2 = new Book("Smart investment","2","Benjamin Graham",true,"available");
-        Book book3 = new Book("Why we want to be rich","3","Donald Trump",true,"available");
-        Book book4 = new Book("Dağın öte yüzü üçlemesi","4","Yaşar kemal",false,"not available");
-        Book book5 = new Book("Yaşar ne yaşar ne yaşamaz","1","Aziz nesin",false,"not available");
-        Book book6 = new Book("Alemdağ'da var bir yılan",null,"Sait faik abasıyanık",true,"available");
-        Book book7 = new Book("Günlerin getirdiği","7"," Nurullah ataç",true,"available");
+        Book book1 = new Book("Rich dad poor dad","Robert Kiyosaki",true,"");
+        Book book2 = new Book("Smart investment","Benjamin Graham",true,"");
+        Book book3 = new Book("Why we want to be rich","Donald Trump",true,"");
+        Book book4 = new Book("Dağın öte yüzü üçlemesi","Yaşar kemal",false,"");
+        Book book5 = new Book("Yaşar ne yaşar ne yaşamaz","Aziz nesin",false,"");
+        Book book6 = new Book("Alemdağ'da var bir yılan","Sait faik abasıyanık",true,"");
+        Book book7 = new Book("Günlerin getirdiği"," Nurullah ataç",true,"");
 
         /**
          * We are added 7 books here with addBook Methods in private HashMap
@@ -78,6 +79,7 @@ public class BookService implements IBookService {
     @Override
     public void addBook(Book book) {
 
+        System.out.println("book detayı " + book);
         if (book == null || book.getIsbn() == null || book.getIsbn().isEmpty()) {
             throw new Child_Book_Not_Available_Ex("Book or ISBN cannot be null/empty.");
         }

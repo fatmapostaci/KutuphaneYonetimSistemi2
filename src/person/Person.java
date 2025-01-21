@@ -30,7 +30,7 @@ abstract public class Person {
      */
     private String generateId() {
 
-        // Benzersiz bir ID oluşturmak için statik idCounter arttırılır.
+        // Benzersiz bir ID oluşturmak için statik idCounter arttırılır. FP1001
         idCounter++;
         //her person için ad soyad ilk harflerini alır, static idCounter'ı ekler ve her kişiye specific id üretir.
         return "" + String.valueOf(name.charAt(0)).toUpperCase() + String.valueOf(surname.charAt(0)).toUpperCase() + idCounter  ;

@@ -3,22 +3,23 @@ package book;
 public class Book {
 
     private String bookName;
-    private String isbn;
+    private final String isbn;
     private String author;
     private boolean available;
     private String currentBorrower;
+    private static int isbnCounter=10000;
 
-    public Book(String bookName, String isbn, String author, boolean available,String currentBorrower) {
+    public Book(String bookName, String author, boolean available,String currentBorrower) {
         this.bookName = bookName;
-        this.isbn = isbn;
+        this.isbn = "ISBN"+isbnCounter;   //ISBN10001,ISBN10002
         this.author = author;
         this.available = available;
         this.currentBorrower = currentBorrower;
+        isbnCounter++;
     }
 
 
-    public Book(String name, String author) {
-    }
+
     public boolean isAvailable() {
         return available;
     }
@@ -64,14 +65,12 @@ public class Book {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     @Override
     public String toString() {
-        return "Book Name: " + bookName + "\nISBN: " + isbn + "\nWriter: " + author + "\nAvailable: " + (available ? "Yes" : "No") + "\n";
+        return "Book Name: " + bookName + "\nISBN: " + isbn + "\nAuthor: " + author +
+                "\nAvailable: " + (available ? "Yes" : "No") + "\nCurrent Borrower: " + (currentBorrower.equals("") ? "Ödünç alınmadı" : currentBorrower)  +"\n";
 
     }
+
 }
 

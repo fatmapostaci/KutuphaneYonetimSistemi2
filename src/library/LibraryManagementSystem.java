@@ -26,7 +26,7 @@ import book.Book;
 import book.BookService;
 import person.Member;
 import person.PersonService;
-
+import utilities.TryCatch;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -47,7 +47,7 @@ public class LibraryManagementSystem {
         //2- Menü sistemi
         while (!exit) {
             printMenu();
-            int choice = getUserChoice();   // Kullanicidan bir secim almak icin
+            int choice = TryCatch.intInput();   // Kullanicidan bir secim almak icin
             switch (choice) {
                 case 1 -> addBook();
                 case 2 -> listBooks();
@@ -88,19 +88,15 @@ public class LibraryManagementSystem {
     }
 
 
-    //5- Kullanıcı girdisi doğrulama ve 4- Exception handling
-    // Kullanicidan secim alma
-    private static int getUserChoice() {
-        return 0;
-    }
 
     // 3- Tüm işlemlerin koordinasyonu ==> Yeni kitap ekle
     private static void addBook() {
         System.out.print("Kitap Adi: ");
-        String name = scanner.nextLine();
+        String name = TryCatch.stringInput();
         System.out.print("Yazar Adi: ");
-        String author = scanner.nextLine();
-        bookService.addBook(new Book(name, author)); // Yeni kitap ekleniyor
+        String author = TryCatch.stringInput();
+        Book newBook = new Book(name,author,true,"");
+        bookService.addBook(newBook); // Yeni kitap ekleniyor
         System.out.println("Kitap basariyla eklendi!");
     }
 
@@ -114,10 +110,8 @@ public class LibraryManagementSystem {
 
     // 3- Tüm işlemlerin koordinasyonu ==> Yeni üye ekle
     private static void addMember() {
-        System.out.print("Üye Adi: ");
-        String name = scanner.nextLine();
-        //personService.addMember(new Member(name)); // Yeni üye ekleniyor
-        System.out.println("Üye basariyla eklendi!");
+
+        personService.addMember();
     }
 
    /* // 3- Tüm işlemlerin koordinasyonu ==> Üyeleri listele
