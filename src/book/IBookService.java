@@ -1,6 +1,6 @@
 package book;
 
-import java.util.List;
+import java.util.Map;
 
 public interface IBookService {
 
@@ -12,7 +12,7 @@ ArrayList veya HashMap kullanarak kitap verilerini sakla.
             void removeBook(String isbn);                // ISBN ile kitap silme
             Book findBook(String isbn);                  // ISBN ile kitap arama
             void updateBook(String isbn, Book book);     // Kitap bilgilerini güncelleme
-            List<Book> getAllBooks();                    // Tüm kitapları listeleme
+            Map<String, Book> getAllBooks();                    // Tüm kitapları listeleme
             boolean isBookAvailable(String isbn);        // Kitap müsaitlik kontrolü
-            List<Book> searchBooks(String keyword);      // Anahtar kelime ile kitap arama
+            Map<String, Book> searchBooks(String keyword);      // Anahtar kelime ile kitap arama
 }

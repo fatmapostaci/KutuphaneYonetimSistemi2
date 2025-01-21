@@ -7,11 +7,19 @@ Kullanıcı girdilerini kontrol et ve doğrula.
 
 
 #### LibraryManagementSystem
+
 1- Konsol tabanlı kullanıcı arayüzü
 2- Menü sistemi
 3- Tüm işlemlerin koordinasyonu
 4- Exception handling
 5- Kullanıcı girdisi doğrulama
+
+- Konsol tabanlı kullanıcı arayüzü
+- Menü sistemi
+- Tüm işlemlerin koordinasyonu
+- Exception handling
+- Kullanıcı(Librarian) girdisi doğrulama
+
      */
 
 import book.Book;

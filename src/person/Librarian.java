@@ -1,15 +1,18 @@
 package person;
 
+import java.util.HashMap;
+
 public class Librarian extends Person {
 
 
-    private String employeeId;
+    private final String employeeId;   //final id
     private String department;
+    private static HashMap<String, Librarian> librarianHashMap = new HashMap<>();
 
-    public Librarian(String name,String surname,  String id, String contactInfo, String email, String department, String employeeId) {
-        super(name, surname, id, contactInfo, email);
+    public Librarian(String name,String surname, String contactInfo, String email, String department) {
+        super(name, surname, contactInfo, email);
         this.department = department;
-        this.employeeId = employeeId;
+        this.employeeId = "E" + super.getId();   //Employee için super constructorda üretilen final id değerine, E harfi eklenerek employee için de specific final id üretir
     }
 
 // Kütüphane yönetim metodları
@@ -21,10 +24,6 @@ public class Librarian extends Person {
 
     public String getEmployeeId() {
         return employeeId;
-    }
-
-    public void setEmployeeId(String employeeId) {
-        this.employeeId = employeeId;
     }
 
     public String getDepartment() {
