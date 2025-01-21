@@ -58,7 +58,7 @@ public class TryCatch {
             giris = "";
             try {
                 giris = scan.nextLine(); // Read the next token
-                scan.nextLine(); // Consume the remaining newline
+               // scan.nextLine(); // Consume the remaining newline
                 flag = false;
             } catch (Exception e) {
                 System.out.println("Please enter a valid input!");

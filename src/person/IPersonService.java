@@ -12,7 +12,7 @@ public interface IPersonService {
 Kitap ödünç alma ve iade etme işlemlerini yönet.
      */
 
-        void addMember();              // Yeni üye ekleme
+        void addMember(Member newMember);              // Yeni üye ekleme
         void removeMember(String id);               // ID ile üye silme
         Member findMember(String id);               // ID ile üye arama
         void updateMember(String id, Member member);// Üye bilgilerini güncelleme
