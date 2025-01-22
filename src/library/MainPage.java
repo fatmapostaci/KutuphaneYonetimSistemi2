@@ -12,20 +12,22 @@ public class MainPage {
         Scanner scanner = new Scanner(System.in);
 
         // Örnek verileri eklemek icin
-        LibraryManagementSystem.addSampleData();
+        LibraryManagementSystem lms = new LibraryManagementSystem();
+        lms.addSampleData();
 
         // Uygulama baslatma
         boolean exit = false;
         while (!exit) {
 
             // Menü seceneklerini gösterme
-            LibraryManagementSystem.printMenu();
+            lms.printMenu();
 
             // Kullanicidan secenek almak icin
-            int choice = TryCatch.intInput("Bir secenek girin: ");
+            System.out.println("Bir secenek girin: ");
+            int choice = TryCatch.intInput();
 
             // Secime göre işlem yap
-            exit = LibraryManagementSystem.handleMenuChoice(choice);
+            exit = lms.handleMenuChoice(choice);
         }
 
         System.out.println("Programdan cikiliyor... 🚪");

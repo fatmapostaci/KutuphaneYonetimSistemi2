@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class TryCatch {
 
     /** Scanner instance for reading user input. */
-    static Scanner scan = new Scanner(System.in);
+    public static Scanner scan = new Scanner(System.in);
 
     /**
      * Handles and validates integer input from the user.
