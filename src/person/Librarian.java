@@ -17,10 +17,7 @@ public class Librarian extends Person {
 
 // Kütüphane yönetim metodları
 
-    @Override
-    void performTask() {
 
-    }
 
     public String getEmployeeId() {
         return employeeId;
@@ -33,4 +30,5 @@ public class Librarian extends Person {
     public void setDepartment(String department) {
         this.department = department;
     }
+
 }

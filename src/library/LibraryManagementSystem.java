@@ -21,7 +21,9 @@ Kullanıcı girdilerini kontrol et ve doğrula.
      */
 
 import book.Book;
+import book.BookService;
 import person.Member;
+import person.PersonService;
 import utilities.TryCatch;
 
 import java.util.HashMap;
@@ -32,8 +34,12 @@ public class LibraryManagementSystem {
     // Kitaplar ve üyeler icin veri yapilari (Map kullanarak ID ile erişim sagliyoruz)
     private static final Map<Integer, Book> books = new HashMap<>();
     private static final Map<Integer, Member> members = new HashMap<>();
+    
 
     public static void main(String[] args) {
+       
+        PersonService personService = new PersonService();
+        BookService bookService = new BookService();
 
         // Ana uygulama baslatildiginda MainPage üzerinden calisacak
         System.out.println("Kütüphane Yönetim Sistemi Başlatılıyor... 📚");
@@ -98,18 +104,28 @@ public class LibraryManagementSystem {
         return false;
     }
 
+    private static void removeMember() {
+    }
+
+    private static void addMemberInteractive() {
+    }
+
     // Kitap ekleme islemi
     private static void addBookInteractive() {
-        int id = TryCatch.intInput("📚 Kitap ID: ");
-        String name = TryCatch.stringInput("📖 Kitap Adi: ");
-        String author = TryCatch.stringInput("✍️ Yazar Adi: ");
+        System.out.println("\"\uD83D\uDCDA Kitap ID: \"");
+        int id = TryCatch.intInput();
+        System.out.println("📖 Kitap Adi: ");
+        String name = TryCatch.stringInput();
+        System.out.println("✍️ Yazar Adi: ");
+        String author = TryCatch.stringInput();
         books.put(id, new Book(name, author, true, ""));
         System.out.println("✔️ Kitap basariyla eklendi!");
     }
 
     // Kitap silme islemi
     private static void removeBook() {
-        int id = TryCatch.intInput("❌ Silmek istediginiz kitabin ID'si: ");
+        System.out.println("❌ Silmek istediginiz kitabin ID'si: ");
+        int id = TryCatch.intInput();
         try {
             if (books.remove(id) == null) {
                 throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
@@ -122,13 +138,16 @@ public class LibraryManagementSystem {
 
     // Kitap güncelleme islemi
     private static void updateBook() {
-        int id = TryCatch.intInput("✏️ Güncellemek istediginiz kitabin ID'si: ");
+        System.out.println("✏️ Güncellemek istediginiz kitabin ID'si: ");
+        int id = TryCatch.intInput();
         try {
             if (!books.containsKey(id)) {
                 throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
             }
-            String name = TryCatch.stringInput("📖 Yeni Kitap Adi: ");
-            String author = TryCatch.stringInput("✍️ Yeni Yazar Adi: ");
+            System.out.println("📖 Yeni Kitap Adi: ");
+            String name = TryCatch.stringInput();
+            System.out.println("✍️ Yeni Yazar Adi: ");
+            String author = TryCatch.stringInput();
             books.put(id, new Book(name, author, true, ""));
             System.out.println("✔️ Kitap basariyla güncellendi!");
         } catch (LibraryException.BookNotFoundException e) {
@@ -147,8 +166,10 @@ public class LibraryManagementSystem {
 
     // Kitap ödünc alma islemi
     private static void borrowBook() {
-        int memberId = TryCatch.intInput("👤 Üye ID: ");
-        int bookId = TryCatch.intInput("📚 Kitap ID: ");
+        System.out.println("👤 Üye ID: ");
+        int memberId = TryCatch.intInput();
+        System.out.println("📚 Kitap ID: ");
+        int bookId = TryCatch.intInput();
         try {
             Book book = books.get(bookId);
             if (book == null) {
@@ -179,14 +200,16 @@ public class LibraryManagementSystem {
 
     // Kitap iade etme islemi
     private static void returnBook() {
-        int bookId = TryCatch.intInput("🔙 Kitap ID: ");
+        System.out.println("🔙 Kitap ID: ");
+        int bookId = TryCatch.intInput();
         try {
             Book book = books.get(bookId);
             if (book == null) {
                 throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
             }
 
-            book.returnBook(); // Kitap iade islemi
+         
+            books.returnBook(); // Kitap iade islemi
             System.out.println("✔️ Kitap basariyla iade edildi.");
         } catch (LibraryException.BookNotFoundException e) {
             System.out.println(e.getMessage()); // Hata mesajı
@@ -195,13 +218,15 @@ public class LibraryManagementSystem {
 
     // Kitap arama islemi
     private static void searchBook() {
-        int choice = TryCatch.intInput("🔍 Arama yapmak icin bir seçenek girin:\n1. Kitap adi ile\n2. Kitap ID'si ile\nSeciminiz: ");
+        System.out.println("🔍 Arama yapmak icin bir seçenek girin:\n1. Kitap adi ile\n2. Kitap ID'si ile\nSeciminiz: ");
+        int choice = TryCatch.intInput();
         switch (choice) {
             case 1: // Kitap adi ile arama
-                String bookName = TryCatch.stringInput("📖 Kitap adi girin: ");
+                System.out.println("📖 Kitap adi girin: ");
+                String bookName = TryCatch.stringInput();
                 boolean foundByName = false;
                 for (Book book : books.values()) {
-                    if (book.getName().equalsIgnoreCase(bookName)) {
+                    if (book.getBookName().equalsIgnoreCase(bookName)) {
                         System.out.println(book); // Kitap bulunduysa yazdir
                         foundByName = true;
                     }
@@ -211,7 +236,8 @@ public class LibraryManagementSystem {
                 }
                 break;
             case 2: // Kitap ID'si ile arama
-                int bookId = TryCatch.intInput("📚 Kitap ID'si girin: ");
+                System.out.println("📚 Kitap ID'si girin: ");
+                int bookId = TryCatch.intInput();
                 Book bookById = books.get(bookId);
                 if (bookById != null) {
                     System.out.println(bookById); // Kitap bulunduysa yazdir

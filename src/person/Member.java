@@ -16,6 +16,8 @@ public class Member extends Person {
     private List<Book> borrowedBooks;  //ISBN list of books
     private static HashMap<String, Member> memberList = new HashMap<>();
 
+
+
     public Member(String name, String surname, String contactInfo, String email ) {
         super(name,surname, contactInfo, email);
         this.totalBorrowNumber =5;   //final değişken, bir kişi max 5 kitap ödünç alabilir.
@@ -52,8 +54,5 @@ public class Member extends Person {
         this.borrowNumber = borrowNumber;
     }
 
-    @Override
-    void performTask() {
-        System.out.println(getName() + " is borrowing a book.");
-    }
+
 }
