@@ -27,7 +27,9 @@ public class PersonService implements IPersonService {
         boolean isRegistered = checkedIfEmailRegistered(newMember.getEmail());
         System.out.println("Test amaçlı sout- member kayıtlı mı " + isRegistered);
         if (isRegistered) {
-            //burada exception atacak şekilde geliştirme yapacağım.
+
+            //todo burada exception atacak şekilde geliştirme yapılacak.
+
             System.out.println("Bu mail adresi sistemde kayıtlıdır farklı bir mail girin.");
         } else {
             Member.getMemberList().put(newMember.getId(), newMember);
