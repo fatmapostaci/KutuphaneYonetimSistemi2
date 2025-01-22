@@ -32,40 +32,38 @@ import java.util.Map;
 public class LibraryManagementSystem {
 
     // Kitaplar ve üyeler icin veri yapilari (Map kullanarak ID ile erişim sagliyoruz)
-    private static final Map<Integer, Book> books = new HashMap<>();
-    private static final Map<Integer, Member> members = new HashMap<>();
-    
+  //  private static final Map<Integer, Book> books = new HashMap<>();
+//    private static final Map<Integer, Member> members = new HashMap<>();
 
-    public static void main(String[] args) {
-       
-        PersonService personService = new PersonService();
-        BookService bookService = new BookService();
+    public PersonService personService = new PersonService();
+    public BookService bookService = new BookService();
 
-        // Ana uygulama baslatildiginda MainPage üzerinden calisacak
-        System.out.println("Kütüphane Yönetim Sistemi Başlatılıyor... 📚");
-    }
+
+//    public static void main(String[] args) {
+//
+//        // Ana uygulama baslatildiginda MainPage üzerinden calisacak
+//        System.out.println("Kütüphane Yönetim Sistemi Başlatılıyor... 📚");
+//    }
 
     // Hos geldiniz mesaji
-    private static void printWelcomeMessage() {
+    private void printWelcomeMessage() {
         System.out.println("=========================================");
         System.out.println("  📚 KÜTÜPHANE YÖNETİM SİSTEMİ 📚");
         System.out.println("=========================================");
     }
 
     // Kitaplar ve üyeler icin örnek veriler ekleniyor
-    public static void addSampleData() {
+    public void addSampleData() {
 
         // Örnek kitaplar ekleniyor
-        books.put(1, new Book("Rich dad poor dad", "Robert Kiyosaki", true, ""));
-        books.put(2, new Book("Smart investment", "Benjamin Graham", true, ""));
 
         // Örnek kullanicilar ekleniyor
-        members.put(1, new Member(1, "Yusuf Kaya", "kayayusuf@example.com"));
-        members.put(2, new Member(2, "Kübra Yılmaz", "yilmazkubra@example.com"));
+        //Member.getMemberList().put("", new Member("Yusuf", "Kaya", "54034343","kayayusuf@example.com"));
+        //members.put(2, new Member("Kübra", "Yılmaz", "54034343","yilmazkubra@example.com"));
     }
 
     // Menü seceneklerini yazdirma (Ana menüyü kullaniciya gösteriyoruz)
-    private static void printMenu() {
+    void printMenu() {
         System.out.println("=========================================");
         System.out.println("\n📚 Ana Menü:");
         System.out.println("1. 🆕 Kitap Ekle");
@@ -83,7 +81,7 @@ public class LibraryManagementSystem {
     }
 
     // Kullanicinin secimine göre islemi yapma
-    public static boolean handleMenuChoice(int choice) {
+    public boolean handleMenuChoice(int choice) {
         switch (choice) {
             case 1 -> addBookInteractive(); // Kitap ekleme
             case 2 -> removeBook(); // Kitap silme
@@ -104,14 +102,14 @@ public class LibraryManagementSystem {
         return false;
     }
 
-    private static void removeMember() {
+    private void removeMember() {
     }
 
-    private static void addMemberInteractive() {
+    private void addMemberInteractive() {
     }
 
     // Kitap ekleme islemi
-    private static void addBookInteractive() {
+    private void addBookInteractive() {
         System.out.println("\"\uD83D\uDCDA Kitap ID: \"");
         int id = TryCatch.intInput();
         System.out.println("📖 Kitap Adi: ");
@@ -123,7 +121,7 @@ public class LibraryManagementSystem {
     }
 
     // Kitap silme islemi
-    private static void removeBook() {
+    private void removeBook() {
         System.out.println("❌ Silmek istediginiz kitabin ID'si: ");
         int id = TryCatch.intInput();
         try {
@@ -137,7 +135,7 @@ public class LibraryManagementSystem {
     }
 
     // Kitap güncelleme islemi
-    private static void updateBook() {
+    private void updateBook() {
         System.out.println("✏️ Güncellemek istediginiz kitabin ID'si: ");
         int id = TryCatch.intInput();
         try {
@@ -165,11 +163,11 @@ public class LibraryManagementSystem {
     }
 
     // Kitap ödünc alma islemi
-    private static void borrowBook() {
+    private void borrowBook() {
         System.out.println("👤 Üye ID: ");
-        int memberId = TryCatch.intInput();
+        String memberId = TryCatch.scan.next();
         System.out.println("📚 Kitap ID: ");
-        int bookId = TryCatch.intInput();
+        String bookId = TryCatch.scan.next();
         try {
             Book book = books.get(bookId);
             if (book == null) {
@@ -189,7 +187,7 @@ public class LibraryManagementSystem {
                 throw new LibraryException.MaxBooksExceededException("❗ Üye, ödünc alabilecegi maksimum kitap sayisina ulasti.");
             }
 
-            book.borrowBook(memberId);
+            personService.borrowBook(memberId,book.getIsbn());
             System.out.println("✔️ Kitap basariyla ödünc alindi.");
 
         } catch (LibraryException.BookNotFoundException | LibraryException.MemberNotFoundException |
@@ -199,7 +197,7 @@ public class LibraryManagementSystem {
     }
 
     // Kitap iade etme islemi
-    private static void returnBook() {
+    private void returnBook() {
         System.out.println("🔙 Kitap ID: ");
         int bookId = TryCatch.intInput();
         try {
@@ -217,7 +215,7 @@ public class LibraryManagementSystem {
     }
 
     // Kitap arama islemi
-    private static void searchBook() {
+    private void searchBook() {
         System.out.println("🔍 Arama yapmak icin bir seçenek girin:\n1. Kitap adi ile\n2. Kitap ID'si ile\nSeciminiz: ");
         int choice = TryCatch.intInput();
         switch (choice) {
