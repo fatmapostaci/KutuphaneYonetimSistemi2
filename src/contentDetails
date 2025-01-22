@@ -1,0 +1,104 @@
+
+## Sınıf ve Interface Detayları
+### Model Sınıfları
+#### Book Sınıfı
+```java
+public class Book {
+    private String isbn;          // Kitap ISBN numarası
+    private String title;         // Kitap başlığı
+    private String author;        // Yazar
+    private boolean available;    // Müsaitlik durumu
+    private String currentBorrower; // Mevcut ödünç alan kişi
+    
+    // Getter ve Setter metodları
+    // Constructor
+    // toString metodu
+}
+```
+#### Person Sınıfı (Abstract)
+```java
+public abstract class Person {
+    private String id;           // Kimlik numarası
+    private String name;         // İsim
+    private String surname;      // Soyisim
+    private String email;        // E-posta
+    
+    // Getter ve Setter metodları
+    // Constructor
+    // toString metodu
+}
+```
+#### Member Sınıfı
+```java
+public class Member extends Person {
+    private List<String> borrowedBooks;  // Ödünç alınan kitapların ISBN listesi
+    private int maxBooks;                // Maksimum ödünç alınabilecek kitap sayısı
+    
+    // Getter ve Setter metodları
+    // Constructor
+    // Kitap ödünç alma ve iade metodları
+}
+```
+#### Librarian Sınıfı
+```java
+public class Librarian extends Person {
+    private String employeeId;   // Çalışan ID'si
+    private String department;   // Çalıştığı departman
+    
+    // Getter ve Setter metodları
+    // Constructor
+    // Kütüphane yönetim metodları
+}
+```
+### Interface'ler
+#### IBookService Interface
+```java
+public interface IBookService {
+    void addBook(Book book);                     // Yeni kitap ekleme
+    void removeBook(String isbn);                // ISBN ile kitap silme
+    Book findBook(String isbn);                  // ISBN ile kitap arama
+    void updateBook(String isbn, Book book);     // Kitap bilgilerini güncelleme
+    List<Book> getAllBooks();                    // Tüm kitapları listeleme
+    boolean isBookAvailable(String isbn);        // Kitap müsaitlik kontrolü
+    List<Book> searchBooks(String keyword);      // Anahtar kelime ile kitap arama
+}
+```
+#### IPersonService Interface
+```java
+public interface IPersonService {
+    void addMember(Member member);              // Yeni üye ekleme
+    void removeMember(String id);               // ID ile üye silme
+    Member findMember(String id);               // ID ile üye arama
+    void updateMember(String id, Member member);// Üye bilgilerini güncelleme
+    List<Member> getAllMembers();               // Tüm üyeleri listeleme
+    void borrowBook(String memberId, String isbn);// Kitap ödünç alma
+    void returnBook(String memberId, String isbn);// Kitap iade etme
+    List<Book> getBorrowedBooks(String memberId);// Üyenin ödünç aldığı kitapları listeleme
+}
+```
+### Exception Sınıfları
+#### LibraryException
+```java
+public class LibraryException extends Exception {
+    // Temel kütüphane exception sınıfı
+}
+```
+#### Özel Exception'lar
+```java
+public class BookNotFoundException extends LibraryException {
+    // Kitap bulunamadığında fırlatılır
+}
+public class MemberNotFoundException extends LibraryException {
+    // Üye bulunamadığında fırlatılır
+}
+public class BookNotAvailableException extends LibraryException {
+    // Kitap müsait olmadığında fırlatılır
+}
+public class MaxBooksExceededException extends LibraryException {
+    // Maksimum kitap sayısı aşıldığında fırlatılır
+}
+```
+Beta
+0 / 0
+used queries
+1

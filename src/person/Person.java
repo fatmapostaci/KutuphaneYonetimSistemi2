@@ -11,9 +11,6 @@ abstract public class Person {
     private static int idCounter = 1000;   //static ürettiğimiz idcounter değeri,her obje üretilirken id değişkenine eklenecek
 
 
-
-    abstract void performTask();
-
     public Person(String name,String surname, String contactInfo, String email) {
         this.name = name;
         this.surname = surname;
