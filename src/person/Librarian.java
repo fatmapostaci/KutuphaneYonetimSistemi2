@@ -31,4 +31,12 @@ public class Librarian extends Person {
         this.department = department;
     }
 
+    public static HashMap<String, Librarian> getLibrarianHashMap() {
+        return librarianHashMap;
+    }
+
+    public static void setLibrarianHashMap(Librarian newLibrarian) {
+
+        Librarian.librarianHashMap.put(newLibrarian.getId(),newLibrarian);
+    }
 }

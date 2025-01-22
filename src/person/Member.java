@@ -42,9 +42,6 @@ public class Member extends Person {
         return memberList;
     }
 
-    public static void setMemberList(HashMap<String, Member> memberList) {
-        Member.memberList = memberList;
-    }
 
     public int getBorrowNumber() {
         return borrowNumber;
@@ -54,5 +51,7 @@ public class Member extends Person {
         this.borrowNumber = borrowNumber;
     }
 
-
+    public static void setMemberList(Member newMember) {
+        Member.memberList.put(newMember.getId(), newMember);
+    }
 }

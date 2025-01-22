@@ -22,12 +22,15 @@ Kullanıcı girdilerini kontrol et ve doğrula.
 
 import book.Book;
 import book.BookService;
+import person.Librarian;
 import person.Member;
 import person.PersonService;
 import utilities.TryCatch;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static book.BookService.books;
 
 public class LibraryManagementSystem {
 
@@ -37,13 +40,6 @@ public class LibraryManagementSystem {
 
     public PersonService personService = new PersonService();
     public BookService bookService = new BookService();
-
-
-//    public static void main(String[] args) {
-//
-//        // Ana uygulama baslatildiginda MainPage üzerinden calisacak
-//        System.out.println("Kütüphane Yönetim Sistemi Başlatılıyor... 📚");
-//    }
 
     // Hos geldiniz mesaji
     private void printWelcomeMessage() {
@@ -58,13 +54,18 @@ public class LibraryManagementSystem {
         // Örnek kitaplar ekleniyor
 
         // Örnek kullanicilar ekleniyor
-        //Member.getMemberList().put("", new Member("Yusuf", "Kaya", "54034343","kayayusuf@example.com"));
-        //members.put(2, new Member("Kübra", "Yılmaz", "54034343","yilmazkubra@example.com"));
+        Member yusuf =  new Member("Yusuf", "Kaya", "54034343","kayayusuf@example.com");
+        Member.setMemberList(yusuf);
+        Member kubra =  new Member("Kübra", "Yılmaz", "54034343","yilmazkubra@example.com");
+        Member.setMemberList(kubra);
+
+        Librarian personel = new Librarian("Master","Master", "549373","master@master.com","Department1");
+        Librarian.setLibrarianHashMap(personel);
     }
 
     // Menü seceneklerini yazdirma (Ana menüyü kullaniciya gösteriyoruz)
     void printMenu() {
-        System.out.println("=========================================");
+        System.out.print("=========================================");
         System.out.println("\n📚 Ana Menü:");
         System.out.println("1. 🆕 Kitap Ekle");
         System.out.println("2. 🗑️ Kitap Sil");
@@ -73,6 +74,7 @@ public class LibraryManagementSystem {
         System.out.println("5. 🧑‍💻 Üye Ekle");
         System.out.println("6. 🗑️ Üye Sil");
         System.out.println("7. 📝 Üye Güncelle");
+        //todo  buraya üyeleri listele ekleyelim
         System.out.println("8. 📥 Kitap Ödünc Al");
         System.out.println("9. 📤 Kitap İade Et");
         System.out.println("10. 🔎 Kitap Ara");
@@ -87,8 +89,10 @@ public class LibraryManagementSystem {
             case 2 -> removeBook(); // Kitap silme
             case 3 -> updateBook(); // Kitap güncelleme
             case 4 -> listBooks(); // Kitaplari listeleme
-            case 5 -> addMemberInteractive(); // Üye ekleme
+            case 5 -> addMember(); // Üye ekleme
             case 6 -> removeMember(); // Üye silme
+            //todo  buraya üyeleri listele ekleyelim
+            //todo method adı getAllMembers()
             case 7 -> borrowBook(); // Kitap ödünc alma
             case 8 -> returnBook(); // Kitap iade etme
             case 9 -> searchBook(); // Kitap arama
@@ -101,67 +105,41 @@ public class LibraryManagementSystem {
         }
         return false;
     }
-
+/*
+-----------start of PersonService Methods------------------------------------------------------
+ */
     private void removeMember() {
-    }
 
-    private void addMemberInteractive() {
-    }
+        //todo -mehmet bey methodu çağırmayı yazdım ancak exception handling gerekiyorsa size bırakıyorum
+        System.out.print("👤 Üye ID: ");
+        String memberId = TryCatch.scan.next();
+        personService.removeMember(memberId);
 
-    // Kitap ekleme islemi
-    private void addBookInteractive() {
-        System.out.println("\"\uD83D\uDCDA Kitap ID: \"");
-        int id = TryCatch.intInput();
-        System.out.println("📖 Kitap Adi: ");
-        String name = TryCatch.stringInput();
-        System.out.println("✍️ Yazar Adi: ");
-        String author = TryCatch.stringInput();
-        books.put(id, new Book(name, author, true, ""));
-        System.out.println("✔️ Kitap basariyla eklendi!");
-    }
 
-    // Kitap silme islemi
-    private void removeBook() {
-        System.out.println("❌ Silmek istediginiz kitabin ID'si: ");
-        int id = TryCatch.intInput();
-        try {
-            if (books.remove(id) == null) {
-                throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
-            }
-            System.out.println("✔️ Kitap basariyla silindi.");
-        } catch (LibraryException.BookNotFoundException e) {
-            System.out.println(e.getMessage()); // Hata mesajı
-        }
     }
-
-    // Kitap güncelleme islemi
-    private void updateBook() {
-        System.out.println("✏️ Güncellemek istediginiz kitabin ID'si: ");
-        int id = TryCatch.intInput();
-        try {
-            if (!books.containsKey(id)) {
-                throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
-            }
-            System.out.println("📖 Yeni Kitap Adi: ");
-            String name = TryCatch.stringInput();
-            System.out.println("✍️ Yeni Yazar Adi: ");
-            String author = TryCatch.stringInput();
-            books.put(id, new Book(name, author, true, ""));
-            System.out.println("✔️ Kitap basariyla güncellendi!");
-        } catch (LibraryException.BookNotFoundException e) {
-            System.out.println(e.getMessage()); // Hata mesajı
-        }
+    private void getAllMembers(){
+        //todo bu method tüm üyeleri listeleyecek, bunu switch içine ekler misiniz
+        personService.getAllMembers();
     }
+    private void addMember() {
 
-    // Kitaplari listeleme islemi
-    private static void listBooks() {
-        if (books.isEmpty()) {
-            System.out.println("📚 Kütüphanede kitap yok.");
-        } for (Book book : books.values()) {
-            System.out.println(book);
-        }
+        //todo -mehmet bey methodu çağırmayı yazdım, test ettim sisteme üye ekliyor, ancak exception handling gerekiyorsa size bırakıyorum
+        System.out.print("👤 Üye Adı: ");
+        String memberName = TryCatch.stringInput();
+
+        System.out.print("👤 Üye Soyadı: ");
+        String memberSurname = TryCatch.stringInput();
+
+        System.out.print("👤 Üye TEL: ");
+        String contactInfo = TryCatch.stringInput();
+
+        System.out.print("👤 Üye Email: ");
+        String mail = TryCatch.stringInput();
+
+
+        Member newMember =  new Member(memberName,memberSurname,contactInfo,mail);
+        personService.addMember(newMember);
     }
-
     // Kitap ödünc alma islemi
     private void borrowBook() {
         System.out.println("👤 Üye ID: ");
@@ -174,7 +152,7 @@ public class LibraryManagementSystem {
                 throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
             }
 
-            Member member = members.get(memberId);
+            Member member = Member.getMemberList().get(memberId);
             if (member == null) {
                 throw new LibraryException.MemberNotFoundException("❗ Üye bulunamadi!");
             }
@@ -198,21 +176,84 @@ public class LibraryManagementSystem {
 
     // Kitap iade etme islemi
     private void returnBook() {
-        System.out.println("🔙 Kitap ID: ");
-        int bookId = TryCatch.intInput();
+        System.out.println("👤 Üye ID: ");
+        String memberId = TryCatch.scan.next();
+        System.out.println("📚 Kitap ID: ");
+        String bookId = TryCatch.scan.next();
         try {
             Book book = books.get(bookId);
             if (book == null) {
                 throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
             }
 
-         
-            books.returnBook(); // Kitap iade islemi
+
+            //todo -> Mehmet Bey burada memberId ve isbn parametre olarak gönderilmeli, siz bookId almışsınız,
+            //todo -> yukarıya memberId alma kısmını ekledim ancak exception method kısmını size bırakıyorum.
+
+            personService.returnBook(memberId, book.getIsbn()); // Kitap iade islemi
             System.out.println("✔️ Kitap basariyla iade edildi.");
         } catch (LibraryException.BookNotFoundException e) {
             System.out.println(e.getMessage()); // Hata mesajı
         }
     }
+
+    /*
+------------start of book service methods------------------------------------------------
+ */
+    // Kitap ekleme islemi
+    private void addBookInteractive() {
+        System.out.print("\"\uD83D\uDCDA Kitap ID: \"");
+        String id = TryCatch.scan.next();
+        System.out.print("📖 Kitap Adi: ");
+        String name = TryCatch.stringInput();
+        System.out.print("✍️ Yazar Adi: ");
+        String author = TryCatch.stringInput();
+        books.put(id, new Book(name, author, true, ""));
+        System.out.println("✔️ Kitap basariyla eklendi!");
+    }
+
+    // Kitap silme islemi
+    private void removeBook() {
+        System.out.println("❌ Silmek istediginiz kitabin ID'si: ");
+        String id = TryCatch.scan.next();
+        try {
+            if (books.remove(id) == null) {
+                throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
+            }
+            System.out.println("✔️ Kitap basariyla silindi.");
+        } catch (LibraryException.BookNotFoundException e) {
+            System.out.println(e.getMessage()); // Hata mesajı
+        }
+    }
+
+    // Kitap güncelleme islemi
+    private void updateBook() {
+        System.out.print("✏️ Güncellemek istediginiz kitabin ID'si: ");
+        String id = TryCatch.scan.next();
+        try {
+            if (!books.containsKey(id)) {
+                throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
+            }
+            System.out.print("📖 Yeni Kitap Adi: ");
+            String name = TryCatch.stringInput();
+            System.out.print("✍️ Yeni Yazar Adi: ");
+            String author = TryCatch.stringInput();
+            books.put(id, new Book(name, author, true, ""));
+            System.out.println("✔️ Kitap basariyla güncellendi!");
+        } catch (LibraryException.BookNotFoundException e) {
+            System.out.println(e.getMessage()); // Hata mesajı
+        }
+    }
+
+    // Kitaplari listeleme islemi
+    private static void listBooks() {
+        if (books.isEmpty()) {
+            System.out.println("📚 Kütüphanede kitap yok.");
+        } for (Book book : books.values()) {
+            System.out.println(book);
+        }
+    }
+
 
     // Kitap arama islemi
     private void searchBook() {
