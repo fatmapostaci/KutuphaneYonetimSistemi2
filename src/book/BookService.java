@@ -21,7 +21,7 @@ public class BookService implements IBookService {
 - Kitap arama ve filtreleme işlemlerini gerçekleştirir
      */
 
-    public static Map<String, Book> books = new HashMap<>();
+    public static Map<String, Book> bookss = new HashMap<>();
 
     public static void main(String[] args) {
         BookService bookService = new BookService();
@@ -37,28 +37,26 @@ public class BookService implements IBookService {
         /**
          * We are added 7 books here with addBook Methods in private HashMap
          */
-        bookService.addBook(book1);
-        bookService.addBook(book2);
-        bookService.addBook(book3);
-        bookService.addBook(book4);
-        //bookService.addBook(book5); //Same isbn code with book1 so it can be throw exception with the runtime.
-        //bookService.addBook(book6); //null isbn code will cause it can be throw exception with the runtime.
-        bookService.addBook(book7);
+
+        bookss.put("1",book1);
+
+        System.out.println("bookService.findBook(\"rich dad poor dad\") = " + bookService.findBook("Rich dad poor dad"));
+
 
         /**
          * We are called remove method and delete book7
          * we will encounter some problem when we will call isbn 10.
          */
-        bookService.removeBook("7"); // isbn code will delete book7.
+        //bookService.removeBook("7"); // isbn code will delete book7.
         //bookService.removeBook("10"); // isbn code will not delete book because don't have this number so it will be throwing runtime exception.
 
 
-        //bookService.updateBook("1",book4);// Normally ıd one is Rich dad poor dad
+        bookService.updateBook("1",book4);// Normally ıd one is Rich dad poor dad
 
         bookService.findBook("10");//return the book with number of book this method have return type don't need sout.
 
 
-        //bookService.getAllBooks();//This method write to all books wit the for each loop in the map ı modifed to string method in the Book class
+        bookService.getAllBooks();//This method write to all books wit the for each loop in the map ı modifed to string method in the Book class
 
         bookService.isBookAvailable("10");//this method show us which book is avaiable for using
 
@@ -83,10 +81,10 @@ public class BookService implements IBookService {
         if (book == null || book.getIsbn() == null || book.getIsbn().isEmpty()) {
             throw new Child_Book_Not_Available_Ex("Book or ISBN cannot be null/empty.");
         }
-        if (books.containsKey(book.getIsbn())) {
+        if (bookss.containsKey(book.getIsbn())) {
             throw new Child_Book_Not_Available_Ex("Book with ISBN " + book.getIsbn() + " already exists.");
         } else {
-            books.put(book.getIsbn(), book);
+            bookss.put(book.getIsbn(), book);
             System.out.println("Book with ISBN " + book.getIsbn() + " added successfully.");
         }
 
@@ -103,8 +101,8 @@ public class BookService implements IBookService {
             throw new Child_Book_Not_Available_Ex("ISBN cannot be null or empty.");
         }
 
-        if (books.containsKey(isbn)) {
-            books.remove(isbn);
+        if (bookss.containsKey(isbn)) {
+            bookss.remove(isbn);
             System.out.println("Book with ISBN " + isbn + " has been removed successfully.");
         } else {
             throw new Child_Book_Not_Found_Ex("No book found with ISBN " + isbn + ".");
@@ -131,8 +129,8 @@ public class BookService implements IBookService {
             throw new Child_Book_Not_Available_Ex("Updated book cannot be null.");
 
         }
-        if (books.containsKey(ID)) {
-            books.put(ID, updatedBook);
+        if (bookss.containsKey(ID)) {
+            bookss.put(ID, updatedBook);
             System.out.println("Book with ISBN " + ID + " has been updated successfully.");
         } else {
             throw new Child_Book_Not_Available_Ex("No book found with ISBN " + ID + ". Update failed.");
@@ -148,15 +146,15 @@ public class BookService implements IBookService {
      */
     @Override
 
-    public Book findBook(String isbn) {
-        if (isbn == null || isbn.isEmpty()) {
+    public Book findBook(String bookName) {
+        if (bookName == null || bookName.isEmpty()) {
             throw new Child_Book_Not_Available_Ex("ISBN cannot be null or empty.");
         }
 
-        Book foundBook = books.get(isbn);
+        Book foundBook = bookss.get(bookName);
 
         if (foundBook == null) {
-            throw new Child_Book_Not_Available_Ex("No book found with ISBN: " + isbn);
+            throw new Child_Book_Not_Available_Ex("No book found with ISBN: " + bookName);
         } else {
             System.out.println("Book found: " + foundBook.getBookName());
         }
@@ -166,18 +164,18 @@ public class BookService implements IBookService {
 
     @Override
     public Map<String, Book> getAllBooks() {
-       for (Map.Entry<String, Book> entry : books.entrySet()) {
+       for (Map.Entry<String, Book> entry : bookss.entrySet()) {
            System.out.println("ID: " + entry.getKey());
            System.out.println(entry.getValue());
            System.out.println("------------------------------");
        }
-        return books;
+        return bookss;
     }
 
     @Override
     public boolean isBookAvailable(String isbn) {
 
-        Book foundBook1 = books.get(isbn);
+        Book foundBook1 = bookss.get(isbn);
 
         if (foundBook1 == null) {
             throw new Child_Book_Not_Available_Ex("No book found with ISBN: " + isbn);
@@ -192,7 +190,7 @@ public class BookService implements IBookService {
 
         Map<String, Book> foundBooks = new HashMap<>();
 
-        Book foundBook = books.get(bookName);
+        Book foundBook = bookss.get(bookName);
 
         if (foundBook != null) {
 
