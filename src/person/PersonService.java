@@ -2,6 +2,7 @@ package person;
 
 import book.Book;
 import book.BookService;
+import library.LibraryManagementSystem;
 
 import java.util.List;
 import java.util.Map;
@@ -173,7 +174,7 @@ public class PersonService implements IPersonService {
         if (borrower.getBorrowNumber() < borrower.getTotalBorrowNumber()) {
 
             //isbn id sine ait olan kitap bilgileri books(HashMap) listesinden getirilir.
-            Book borrowedBook = BookService.books.get(isbn);
+            Book borrowedBook = LibraryManagementSystem.books.get(isbn);
 
             //ödünç alan kişinin ödünç aldığı kitap, borrowedBooks(List) listesine kitabı ekler
             borrower.getBorrowedBooks().add(borrowedBook);
@@ -209,7 +210,7 @@ public class PersonService implements IPersonService {
         Member borrower = findMember(memberId);
 
         //isbn id sine ait olan kitap bilgileri books(HashMap) listesinden getirilir.
-        Book borrowedBook = BookService.books.get(isbn);
+        Book borrowedBook = LibraryManagementSystem.books.get(isbn);
 
         //ödünç alan kişinin ödünç aldığı kitap, borrowedBooks(List) listesinden silinir
         borrower.getBorrowedBooks().remove(borrowedBook);

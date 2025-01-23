@@ -22,6 +22,7 @@ Kullanıcı girdilerini kontrol et ve doğrula.
 
 import book.Book;
 import book.BookService;
+import mertay.exceptionsclasses.Child_Book_Not_Found_Ex;
 import person.Librarian;
 import person.Member;
 import person.PersonService;
@@ -30,13 +31,13 @@ import utilities.TryCatch;
 import java.util.HashMap;
 import java.util.Map;
 
-import static book.BookService.books;
+
 
 public class LibraryManagementSystem {
 
     // Kitaplar ve üyeler icin veri yapilari (Map kullanarak ID ile erişim sagliyoruz)
-  //  private static final Map<Integer, Book> books = new HashMap<>();
-//    private static final Map<Integer, Member> members = new HashMap<>();
+   public static  Map<Integer, Book> books = new HashMap<>();
+   private static  Map<Integer, Member> members = new HashMap<>();
 
     public PersonService personService = new PersonService();
     public BookService bookService = new BookService();
@@ -52,6 +53,10 @@ public class LibraryManagementSystem {
     public void addSampleData() {
 
         // Örnek kitaplar ekleniyor
+
+
+
+
 
         // Örnek kullanicilar ekleniyor
         Member yusuf =  new Member("Yusuf", "Kaya", "54034343","kayayusuf@example.com");
@@ -73,11 +78,10 @@ public class LibraryManagementSystem {
         System.out.println("4. 📜 Kitaplari Listele");
         System.out.println("5. 🧑‍💻 Üye Ekle");
         System.out.println("6. 🗑️ Üye Sil");
-        System.out.println("7. 📝 Üye Güncelle");
-        //todo  buraya üyeleri listele ekleyelim
-        System.out.println("8. 📥 Kitap Ödünc Al");
-        System.out.println("9. 📤 Kitap İade Et");
-        System.out.println("10. 🔎 Kitap Ara");
+        System.out.println("7. 📥 Kitap Ödünc Al");
+        System.out.println("8. 📤 Kitap İade Et");
+        System.out.println("9. 🔎 Kitap Ara");
+        System.out.println("10. üyeleri listele");
         System.out.println("0. 🚪 Cikis");
         System.out.print("Seciminizi yapin: ");
     }
@@ -91,13 +95,11 @@ public class LibraryManagementSystem {
             case 4 -> listBooks(); // Kitaplari listeleme
             case 5 -> addMember(); // Üye ekleme
             case 6 -> removeMember(); // Üye silme
-            //todo  buraya üyeleri listele ekleyelim
-            //todo method adı getAllMembers()
             case 7 -> borrowBook(); // Kitap ödünc alma
             case 8 -> returnBook(); // Kitap iade etme
             case 9 -> searchBook(); // Kitap arama
+            case 10 -> getAllMembers();//üye listeleme
             case 0 -> {
-
                 System.out.println("Cikis yapiliyor... 🚪");
                 return true; // Cikis yap
             }
@@ -118,7 +120,6 @@ public class LibraryManagementSystem {
 
     }
     private void getAllMembers(){
-        //todo bu method tüm üyeleri listeleyecek, bunu switch içine ekler misiniz
         personService.getAllMembers();
     }
     private void addMember() {
@@ -203,45 +204,65 @@ public class LibraryManagementSystem {
     // Kitap ekleme islemi
     private void addBookInteractive() {
         System.out.print("\"\uD83D\uDCDA Kitap ID: \"");
-        String id = TryCatch.scan.next();
+        Integer id = Integer.valueOf(TryCatch.scan.nextLine());
         System.out.print("📖 Kitap Adi: ");
-        String name = TryCatch.stringInput();
+        String bookName = TryCatch.stringInput();
+        System.out.println("");
         System.out.print("✍️ Yazar Adi: ");
         String author = TryCatch.stringInput();
-        books.put(id, new Book(name, author, true, ""));
+        books.put(Integer.valueOf(id), new Book(bookName, author, true, ""));
         System.out.println("✔️ Kitap basariyla eklendi!");
     }
 
     // Kitap silme islemi
     private void removeBook() {
-        System.out.println("❌ Silmek istediginiz kitabin ID'si: ");
-        String id = TryCatch.scan.next();
-        try {
-            if (books.remove(id) == null) {
-                throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
+        System.out.println("❌ Silmek istediginiz kitabin adını: ");
+        String bookName = TryCatch.stringInput();
+        boolean bookFound = false;
+
+        // Kitapları kontrol et
+        for (Map.Entry<Integer, Book> entry : books.entrySet()) {
+            if (entry.getValue().getBookName().equalsIgnoreCase(bookName)) {
+                books.remove(entry.getKey()); // Anahtar üzerinden sil
+                System.out.println("✔️ Kitap '" + bookName + "' basariyla silindi.");
+                bookFound = true;
+                break;
             }
-            System.out.println("✔️ Kitap basariyla silindi.");
-        } catch (LibraryException.BookNotFoundException e) {
-            System.out.println(e.getMessage()); // Hata mesajı
+        }
+
+        if (!bookFound) {
+            throw new Child_Book_Not_Found_Ex("No book found with name '" + bookName + "'.");
         }
     }
 
     // Kitap güncelleme islemi
     private void updateBook() {
-        System.out.print("✏️ Güncellemek istediginiz kitabin ID'si: ");
-        String id = TryCatch.scan.next();
-        try {
-            if (!books.containsKey(id)) {
-                throw new LibraryException.BookNotFoundException("❗ Kitap bulunamadi!");
+        System.out.print("✏️ Güncellemek istediginiz kitabin adını: ");
+        String bookName = TryCatch.stringInput(); // Kullanıcıdan kitap adı al
+
+        boolean bookFound = false;
+
+        // Map'teki tüm girişleri dolaş
+        for (Map.Entry<Integer, Book> entry : books.entrySet()) {
+            if (entry.getValue().getBookName().equalsIgnoreCase(bookName)) {
+                System.out.print("📖 Yeni Kitap Adı: ");
+                String newName = TryCatch.stringInput();
+                System.out.print("✍️ Yeni Yazar Adı: ");
+                String newAuthor = TryCatch.stringInput();
+
+
+                Book book = entry.getValue();
+                book.setBookName(newName);
+                book.setAuthor(newAuthor);
+                System.out.println("✔️ Kitap '" + bookName + "' başarıyla güncellendi!");
+
+                bookFound = true;
+                break;
             }
-            System.out.print("📖 Yeni Kitap Adi: ");
-            String name = TryCatch.stringInput();
-            System.out.print("✍️ Yeni Yazar Adi: ");
-            String author = TryCatch.stringInput();
-            books.put(id, new Book(name, author, true, ""));
-            System.out.println("✔️ Kitap basariyla güncellendi!");
-        } catch (LibraryException.BookNotFoundException e) {
-            System.out.println(e.getMessage()); // Hata mesajı
+        }
+
+        if (!bookFound) {
+            System.out.println("❗ Kitap '" + bookName + "' bulunamadı!");
         }
     }
 
@@ -263,9 +284,10 @@ public class LibraryManagementSystem {
             case 1: // Kitap adi ile arama
                 System.out.println("📖 Kitap adi girin: ");
                 String bookName = TryCatch.stringInput();
+
                 boolean foundByName = false;
-                for (Book book : books.values()) {
-                    if (book.getBookName().equalsIgnoreCase(bookName)) {
+                for (Map.Entry<Integer, Book> book : books.entrySet()) {
+                    if (book.getValue().getBookName().equalsIgnoreCase(bookName)) {
                         System.out.println(book); // Kitap bulunduysa yazdir
                         foundByName = true;
                     }
